@@ -33,7 +33,7 @@
                 <hr>
                 <h4 class="mt-0">Комментарии</h4>
                 <#if currentUserId??>
-                    <#include "parts/commentEdit.ftl"/>
+                    <#include "modules/commentEdit.ftl"/>
                 </#if>
             </div>
         </div>

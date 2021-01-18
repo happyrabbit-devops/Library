@@ -1,6 +1,6 @@
 package com.main.library.config;
 
-import com.main.library.service.UserService;
+import com.main.library.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

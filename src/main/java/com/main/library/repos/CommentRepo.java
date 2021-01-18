@@ -8,5 +8,7 @@ import java.util.List;
 
 @Repository
 public interface CommentRepo extends CrudRepository<Comment, Long> {
+
     List<Comment> findByTag(String tag);
+
 }

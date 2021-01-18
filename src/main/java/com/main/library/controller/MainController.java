@@ -21,20 +21,23 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
 @Controller
 public class MainController {
 
-    @Autowired
-    private CommentRepo commentRepo;
+    private final CommentRepo commentRepo;
+    private final BookRepo bookRepo;
+    private final BookService bookService;
 
     @Autowired
-    private BookRepo bookRepo;
-
-    @Autowired
-    private BookService bookService;
+    public MainController(CommentRepo commentRepo, BookRepo bookRepo, BookService bookService) {
+        this.commentRepo = commentRepo;
+        this.bookRepo = bookRepo;
+        this.bookService = bookService;
+    }
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -46,7 +49,8 @@ public class MainController {
 
     @GetMapping("/books")
     public String books(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Book> books = bookRepo.findAll();
+
+        Iterable<Book> books;
 
         if (filter != null && !filter.isEmpty()) {
             books = bookRepo.findByCaption(filter);
@@ -89,7 +93,8 @@ public class MainController {
 
     @GetMapping("/main")
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model) {
-        Iterable<Comment> comments = commentRepo.findAll();
+
+        Iterable<Comment> comments;
 
         if (filter != null && !filter.isEmpty()) {
             comments = commentRepo.findByTag(filter);
@@ -129,11 +134,12 @@ public class MainController {
     }
 
     private void saveFile(@Valid Comment comment, @Valid Book book, @RequestParam("file") MultipartFile file) throws IOException {
-        if (file != null && !file.getOriginalFilename().isEmpty()) {
+
+        if (file != null && !Objects.requireNonNull(file.getOriginalFilename()).isEmpty()) {
             File uploadDir = new File(uploadPath);
 
             if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+                final boolean mkdir = uploadDir.mkdir();
             }
 
             String uuidFile = UUID.randomUUID().toString();

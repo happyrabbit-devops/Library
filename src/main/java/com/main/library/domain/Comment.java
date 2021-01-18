@@ -1,10 +1,14 @@
 package com.main.library.domain;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+@Setter
+@Getter
 @Entity
 public class Comment {
 
@@ -12,7 +16,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
 
-    @NotBlank(message = "Please fill the message")
+    @NotBlank(message = "Сообщение не может быть пустым")
     @Length(max = 2048, message = "Сообщение слишком длинное (более 2kB)")
     private String text;
 
@@ -22,14 +26,6 @@ public class Comment {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
-
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
-        this.book = book;
-    }
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id")
@@ -58,35 +54,4 @@ public class Comment {
         Id = id;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
-    public String getFilename() {
-        return filename;
-    }
-
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
 }

@@ -15,11 +15,14 @@ import com.main.library.repos.BookRepo;
 @Service
 public class BookService {
 
-    @Autowired
-    private BookRepo bookRepo;
+    private final BookRepo bookRepo;
+    private final AuthorRepo authorRepo;
 
     @Autowired
-    private AuthorRepo authorRepo;
+    public BookService(BookRepo bookRepo, AuthorRepo authorRepo) {
+        this.bookRepo = bookRepo;
+        this.authorRepo = authorRepo;
+    }
 
     public boolean addBook(Book book, User user, Map<String, String> form) {
         List<Book> bookFromDb = bookRepo.findByCaption(book.getCaption());

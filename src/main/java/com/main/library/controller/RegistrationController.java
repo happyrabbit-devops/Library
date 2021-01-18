@@ -15,19 +15,23 @@ import org.springframework.web.client.RestTemplate;
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 public class RegistrationController {
+
     private final static String CAPTCHA_URL = "https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s";
+    private final UserService userService;
+    private final RestTemplate restTemplate;
 
     @Autowired
-    private UserService userService;
+    public RegistrationController(UserService userService, RestTemplate restTemplate) {
+        this.userService = userService;
+        this.restTemplate = restTemplate;
+    }
 
     @Value("${recaptcha.secret}")
     private String secret;
-
-    @Autowired
-    private RestTemplate restTemplate;
 
     @GetMapping("/registration")
     public String registration(@ModelAttribute("message") String message) {
@@ -45,7 +49,7 @@ public class RegistrationController {
         String url = String.format(CAPTCHA_URL, secret, captchaResponse);
         CaptchaResponseDto response = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
 
-        if (!response.isSuccess()) {
+        if (!Objects.requireNonNull(response).isSuccess()) {
             model.addAttribute("captchaError", "Заполните каптчу");
         }
 

@@ -25,7 +25,7 @@ public class BookService implements IBookService {
         this.authorRepo = authorRepo;
     }
 
-    public boolean addBook(Book book, User user, Map<String, String> form) {
+    public boolean addBook(Book book, String authorAlias, Map<String, String> form) {
         List<Book> bookFromDb = bookRepo.findByCaption(book.getCaption());
 
         if (bookFromDb.size() > 0) {
@@ -48,7 +48,7 @@ public class BookService implements IBookService {
 
         book.setGenres(myGenres);
 
-        book.setAuthor(authorRepo.findByUser(user));
+        book.setAuthor(authorRepo.findByAlias(authorAlias));
 
         bookRepo.save(book);
 

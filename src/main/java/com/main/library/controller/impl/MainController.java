@@ -72,6 +72,7 @@ public class MainController implements IMainController {
                           BindingResult bindingResult,
                           Model model,
                           @RequestParam("file") MultipartFile file,
+                          @RequestParam("authorAlias") String authorAlias,
                           @RequestParam Map<String, String> form) throws IOException {
 
         if (bindingResult.hasErrors()) {
@@ -85,10 +86,8 @@ public class MainController implements IMainController {
 
             model.addAttribute("book", null);
 
-            bookService.addBook(book, user, form);
+            bookService.addBook(book, authorAlias, form);
         }
-
-        bookRepo.save(book);
 
         Iterable<Book> books = bookRepo.findAll();
 

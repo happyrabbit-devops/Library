@@ -7,5 +7,5 @@ import java.util.Map;
 
 public interface IBookService {
 
-    boolean addBook(Book book, User user, Map<String, String> form);
+    boolean addBook(Book book, String authorAlias, Map<String, String> form);
 }

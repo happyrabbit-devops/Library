@@ -55,14 +55,8 @@ create table author (
      id int8 not null,
      alias varchar(60) not null,
      biography varchar(2048) not null,
-     user_id int8,
      primary key (id)
 );
-
-alter table
-    if exists author
-    add
-        constraint author_user_fk foreign key (user_id) references usr;
 
 alter table
     if exists book

@@ -25,6 +25,7 @@ public interface IMainController {
             BindingResult bindingResult,
             Model model,
             @RequestParam("file") MultipartFile file,
+            @RequestParam("authorAlias") String authorAlias,
             @RequestParam Map<String, String> form) throws IOException;
 
     String main(@RequestParam(required = false, defaultValue = "") String filter, Model model);

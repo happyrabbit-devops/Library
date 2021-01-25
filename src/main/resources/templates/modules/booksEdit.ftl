@@ -15,6 +15,16 @@
                 </#if>
             </div>
             <div class="form-group col-sm-6">
+                <label class="author-label" for="authorAlias">Автор:</label>
+                <input type="text" id="authorAlias" name="authorAlias" class="form-control ${(authorError??)?string('is-invalid', '')}"
+                       value="" placeholder="Псевдоним автора">
+                <#if authorError??>
+                    <div class="invalid-feedback">
+                        ${authorError}
+                    </div>
+                </#if>
+            </div>
+            <div class="form-group col-sm-6">
                 <label class="genre-label">Жанр:</label>
                 <#list genres as genre>
                     <#if book??>

@@ -23,7 +23,6 @@ public class Author {
     public Author(String alias, String biography, User user) {
         this.alias = alias;
         this.biography = biography;
-        this.user = user;
     }
 
     @NotBlank(message = "Псевдоним не может быть пустым")
@@ -31,10 +30,6 @@ public class Author {
 
     @NotBlank(message = "Биография не может быть пустой")
     private String biography;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Book> books;

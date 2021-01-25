@@ -10,10 +10,10 @@ insert into user_role (user_id, roles)
 insert into user_role (user_id, roles)
 values (2, 'USER');
 
-insert into author (id, alias, biography, user_id)
-values (1, 'S.King', '<Биография Стивена кинга>', 1),
-       (2, 'J.Rolling', '<Биография Джоан Роллинг>', 2),
-       (3, 'Уэсли Арчер', '<Биография Уэсли Арчер>', 2);
+insert into author (id, alias, biography)
+values (1, 'S.King', '<Биография Стивена кинга>'),
+       (2, 'J.Rolling', '<Биография Джоан Роллинг>'),
+       (3, 'Уэсли Арчер', '<Биография Уэсли Арчер>');
 
 insert into book (id, filename, caption, description, content, author_id, published)
 values (10, 'Mist.png', 'Мгла', '<Описание мглы>',

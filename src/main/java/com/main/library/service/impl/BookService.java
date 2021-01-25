@@ -25,6 +25,7 @@ public class BookService implements IBookService {
         this.authorRepo = authorRepo;
     }
 
+    @Override
     public boolean addBook(Book book, String authorAlias, Map<String, String> form) {
         List<Book> bookFromDb = bookRepo.findByCaption(book.getCaption());
 

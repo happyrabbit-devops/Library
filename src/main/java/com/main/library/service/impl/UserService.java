@@ -45,6 +45,7 @@ public class UserService implements UserDetailsService, IUserService {
         return user;
     }
 
+    @Override
     public boolean addUser(User user) {
         User userFromDb = userRepo.findByUsername(user.getUsername());
 
@@ -80,6 +81,7 @@ public class UserService implements UserDetailsService, IUserService {
         }
     }
 
+    @Override
     public boolean activateUser(String code) {
 
         User user = userRepo.findByActivationCode(code);
@@ -96,10 +98,12 @@ public class UserService implements UserDetailsService, IUserService {
         return true;
     }
 
+    @Override
     public List<User> findAll() {
         return userRepo.findAll();
     }
 
+    @Override
     public void saveUser(User user, String username, Map<String, String> form) {
         user.setUsername(username);
 
@@ -118,6 +122,7 @@ public class UserService implements UserDetailsService, IUserService {
         userRepo.save(user);
     }
 
+    @Override
     public void updateProfile(User user, String password, String email) {
         String userEmail = user.getEmail();
 
@@ -143,11 +148,13 @@ public class UserService implements UserDetailsService, IUserService {
         }
     }
 
+    @Override
     public void subscribe(User currentUser, User user) {
         user.getSubscribers().add(currentUser);
         userRepo.save(user);
     }
 
+    @Override
     public void unsubscribe(User currentUser, User user) {
         user.getSubscribers().remove(currentUser);
         userRepo.save(user);
